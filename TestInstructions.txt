@@ -1,0 +1,34 @@
+Test Instructions
+
+You have finished the mini-project in last couple weeks. To evaluate the performance of each task and marking for your assignment, we provide the test data for you. For face detection, raw images are provided. You are required to read and extract the features, and apply your trained detector for evaluating  face detection performance. For face recognition/verification, the cropped faces and labels for both recognition and verification task are provided. You should extract the features, and apply your trained recogniser/detector to evaluate the performance.
+
+Steps:
+1. unzip the tar.gz file to your project directory. (The 'evaluate_detector.m' is updated.)
+2. For both parts, Assignment1 and Assignment2, change the loading of validation data to point at the test data directory.
+3. We have corrected a small bug in the evaluation code for Part1 / Assignment1.m. Update the assignment to the new VOC average precision routine (VOCap.m).
+4. The required updates are illustrated in Assignment1_eval_samplecode.m. Now when you run Assignment1, it will load the testing data, apply your classifier and evaluate the result with the updated VOCap function.
+5. For demo purposes if your classifier takes long to train you can make it skip that part of Assignment1 and load a pre-trained classifier (as illustrated by Assignment1_eval_samplecode.m). Just run the pre-trained classifier during the demo.
+
+Specific code Updates as follows:
+Face detection:
+- Comment out your previous loading of the validation data (L33 of original issued assignment1.m), and replace with:
+    -* val_dir{2} = './data/face_detection/te_raw_images';  	 	% image directory
+
+- Comment out the previous average precision code (L260:263 of of original issued assignment1.m), and paste in the updated lines.
+    -* AP = VOCap(Recall', Precision'); % Compute the interpolated average precision
+       disp(num2str(AP))		% print the average precision
+
+- You can reevaluate your model on the validation datasets. The random/okay/good result could be 0.003/0.80/0.91
+- You should evaluate your model on the test datasets. The random/okay/good result could be 0.003/0.80/0.90
+
+
+Face recognition:
+- You should replace: the folder name from 'face_verification_va' to
+'face_verification_te'.
+- load('./data/face_recognition/face_recognition_data_te.mat')
+
+
+Face verification:
+- You should replace: the folder name from 'face_recognition_data_va' to
+'face_recognition_data_te'.
+- load('./data/face_verification/face_verification_te.mat')
